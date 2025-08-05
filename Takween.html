@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة تكوين - بوابة الإبداع الأردنية</title>
+    <style>
+        :root {
+            /* الألوان الرئيسية */
+            --primary: #6C3483; /* بنفسجي غامق */
+            --secondary: #9B59B6; /* بنفسجي فاتح */
+            --accent: #8E44AD; /* بنفسجي متوسط */
+            --text: #333;
+            --light: #F5EEF8;
+            --white: #FFFFFF;
+            --dark: #4A235A;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light);
+            color: var(--text);
+        }
+
+        /* الشريط العلوي */
+        .navbar {
+            background: var(--white);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* الصفحة الرئيسية */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1688223954745-64c14efce45e?q=80&w=1128&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 8rem 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--dark);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* أشرطة الصور */
+        .image-strip {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .image-card {
+            flex: 1;
+            min-width: 250px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .image-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .image-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .image-card .card-content {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .image-card h3 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+
+        /* المكتبات */
+        .library-header {
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 8rem 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .library-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1;
+        }
+
+        .library-header h1, .library-header p {
+            position: relative;
+            z-index: 2;
+        }
+
+        .artist-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+        }
+
+        .artist-info {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            height: fit-content;
+            position: sticky;
+            top: 6rem;
+        }
+
+        .artist-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1rem;
+            display: block;
+            border: 5px solid var(--secondary);
+        }
+
+        .artist-name {
+            text-align: center;
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .artist-bio {
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .artist-contact {
+            display: block;
+            background: var(--accent);
+            color: white;
+            padding: 0.8rem 1rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s;
+            width: fit-content;
+            margin: 0.5rem auto 0;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .artist-contact:hover {
+            background: var(--primary);
+        }
+
+        .main-content {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .main-content img {
+            width: 100%;
+            border-bottom: 1px solid #eee;
+            display: block;
+            max-height: 600px;
+            object-fit: contain;
+        }
+        
+        .content-details { 
+            padding: 1.5rem; 
+        }
+
+        .content-title {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn-primary { 
+            background: var(--primary); 
+            color: white; 
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .btn-secondary { 
+            background: var(--secondary); 
+            color: white; 
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .btn-primary:hover { background: var(--dark); }
+        .btn-secondary:hover { background: var(--accent); }
+
+        .gallery-title {
+            margin: 3rem 0 1rem;
+            font-size: 1.8rem;
+            color: var(--primary);
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 0.5rem;
+        }
+
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .item-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .item-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .item-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-info { padding: 1.5rem; }
+
+        .card-creator { 
+            font-weight: bold; 
+            margin-bottom: 0.3rem; 
+            color: var(--accent);
+        }
+
+        .card-title { font-size: 1.2rem; margin-bottom: 0.5rem; }
+
+        .horizontal-scroll-section {
+            max-width: 100%;
+            margin: 4rem 0;
+            padding: 0 1rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 1rem;
+        }
+
+        .section-title { 
+            font-size: 1.8rem; 
+            margin: 0; 
+            color: var(--primary);
+        }
+
+        .view-all {
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            color: var(--accent);
+        }
+
+        .view-all:hover { color: var(--primary); }
+
+        .horizontal-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 2rem;
+            padding: 2rem 1rem;
+            margin: 0 -1rem;
+        }
+
+        .horizontal-scroll::-webkit-scrollbar { height: 8px; }
+        .horizontal-scroll::-webkit-scrollbar-thumb { background: var(--secondary); }
+
+        .scroll-card {
+            flex: 0 0 auto;
+            width: 280px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .scroll-card:hover { transform: translateY(-5px); }
+
+        .scroll-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .scroll-card-info { padding: 1.5rem; }
+
+        .scroll-creator { 
+            font-weight: bold; 
+            margin-bottom: 0.3rem; 
+            color: var(--accent);
+        }
+
+        .scroll-title { font-size: 1.1rem; margin-bottom: 0.5rem; }
+
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 3rem 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+        }
+
+        .footer-links { 
+            display: flex; 
+            justify-content: center; 
+            gap: 2rem; 
+            margin: 1.5rem 0; 
+        }
+
+        .footer-links a { 
+            color: white; 
+            text-decoration: none; 
+            transition: opacity 0.3s; 
+        }
+
+        .footer-links a:hover { opacity: 0.8; }
+
+        /* الصفحات المخفية */
+        .page { display: none; }
+        .page.active { display: block; }
+
+        /* التجاوبية */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .artist-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .artist-info {
+                position: static;
+                margin-bottom: 2rem;
+            }
+            
+            .image-strip {
+                flex-direction: column;
+            }
+            
+            .image-card {
+                min-width: 100%;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="logo">منصة تكوين</div>
+        <div class="nav-links">
+            <a href="#" class="nav-link active" data-page="home">الرئيسية</a>
+            <a href="#" class="nav-link" data-page="video-library">مكتبة الفيديو</a>
+            <a href="#" class="nav-link" data-page="photo-gallery">معرض الصور</a>
+            <a href="#" class="nav-link" data-page="art-gallery">معرض اللوحات الفنية</a>
+            <a href="#" class="nav-link" data-page="writing-blog">مدونة الكتابة الإبداعية</a>
+            <a href="#" class="nav-link" data-page="reading-library">مكتبة القراءة</a>
+            <a href="#" class="nav-link" data-page="business-directory">دليل الأعمال</a>
+            <a href="#" class="nav-link" data-page="events-library">مكتبة الفعاليات المحلية</a>
+        </div>
+    </nav>
+
+    <!-- الصفحة الرئيسية -->
+    <div id="home" class="page active">
+<section class="hero">
+    <h1>مرحباً بكم في منصة تكوين</h1>
+    <p>منصة إبداعية لدعم المواهب الأردنية في مختلف المجالات الفنية والثقافية</p>
+</section>
+
+        <div class="container">
+<h2 class="section-title" style="border-bottom: none;">المكونات الإبداعية</h2>
+            <div class="image-strip">
+                <a href="#" class="image-card" data-page="video-library">
+                    <img src="https://images.unsplash.com/photo-1719937051095-a06a241400e2?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="مكتبة الفيديو">
+                    <div class="card-content">
+                        <h3>مكتبة الفيديو</h3>
+                        <p>أعمال إبداعية في صناعة الفيديو والمونتاج</p>
+                    </div>
+                </a>
+                <a href="#" class="image-card" data-page="photo-gallery">
+                    <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="معرض الصور">
+                    <div class="card-content">
+                        <h3>معرض الصور</h3>
+                        <p>أجمل الصور الفوتوغرافية للمصورين الأردنيين</p>
+                    </div>
+                </a>
+                <a href="#" class="image-card" data-page="art-gallery">
+                    <img src="https://images.unsplash.com/photo-1651023002752-a1eb27129d2b?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="معرض اللوحات الفنية">
+                    <div class="card-content">
+                        <h3>معرض اللوحات الفنية</h3>
+                        <p>إبداعات الفنانين التشكيليين الأردنيين</p>
+                    </div>
+                </a>
+                <a href="#" class="image-card" data-page="writing-blog">
+                    <img src="https://images.unsplash.com/photo-1505682634904-d7c8d95cdc50?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="مدونة الكتابة الإبداعية">
+                    <div class="card-content">
+                        <h3>مدونة الكتابة الإبداعية</h3>
+                        <p>إبداعات الكتاب والأدباء الأردنيين</p>
+                    </div>
+                </a>
+                <a href="#" class="image-card" data-page="reading-library">
+                    <img src="https://images.unsplash.com/photo-1588581417930-c33d62c803c7?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="مكتبة القراءة">
+                    <div class="card-content">
+                        <h3>مكتبة القراءة</h3>
+                        <p>مجموعة من الكتب والمراجع القيمة</p>
+                    </div>
+                </a>
+                <a href="#" class="image-card" data-page="business-directory">
+                    <img src="https://images.unsplash.com/photo-1615914143778-1a1a6e50c5dd?q=80&w=1168&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="دليل الأعمال">
+                    <div class="card-content">
+                        <h3>دليل الأعمال</h3>
+                        <p>دليل لأصحاب الأعمال الإبداعية</p>
+                    </div>
+                </a>
+                <a href="#" class="image-card" data-page="events-library">
+                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="مكتبة الفعاليات المحلية">
+                    <div class="card-content">
+                        <h3>مكتبة الفعاليات المحلية</h3>
+                        <p>فعاليات ثقافية وفنية في الأردن</p>
+                    </div>
+                </a>
+            </div>
+
+            <h2 class="section-title">خدمات صناع المحتوى </h2>
+            <div class="image-strip">
+                <a href="#" class="image-card" data-service="photography">
+                    <img src="https://images.unsplash.com/photo-1520390138845-fd2d229dd553?q=80&w=1489&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="جلسة تصوير فوتغرافي">
+                    <div class="card-content">
+                        <h3>احجز جلسة تصوير فوتغرافي</h3>
+                    </div>
+                </a>
+                <a href="#" class="image-card" data-service="videography">
+                    <img src="https://images.unsplash.com/photo-1497015289639-54688650d173?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="جلسة تصوير فيديو">
+                    <div class="card-content">
+                        <h3>احجز جلسة تصوير فيديو</h3>
+                    </div>
+                </a>
+                <a href="#" class="image-card" data-service="content-writing">
+                    <img src="https://images.unsplash.com/photo-1668092548064-730e05fd0324?q=80&w=1167&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="كتابة محتوى">
+                    <div class="card-content">
+                        <h3>كتابة محتوى</h3>
+                    </div>
+                </a>
+                <a href="#" class="image-card" data-service="marketing">
+                    <img src="https://images.unsplash.com/photo-1552581234-26160f608093?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="تسويق">
+                    <div class="card-content">
+                        <h3>تسويق</h3>
+                    </div>
+                </a>
+                <a href="#" class="image-card" data-service="art-service">
+                    <img src="https://images.unsplash.com/photo-1578926375605-eaf7559b1458?q=80&w=1410&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="خدمة الرسم الفني">
+                    <div class="card-content">
+                        <h3>خدمة الرسم الفني</h3>
+                    </div>
+                </a>
+                <a href="#" class="image-card" data-service="graphic-design">
+                    <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="خدمة التصميم الجرافيكي">
+                    <div class="card-content">
+                        <h3>خدمة التصميم الجرافيكي</h3>
+                    </div>
+                </a>
+                <a href="#" class="image-card" data-service="volunteering">
+                    <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="العمل التطوعي">
+                    <div class="card-content">
+                        <h3>العمل التطوعي</h3>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- مكتبة الفيديو -->
+    <div id="video-library" class="page">
+        <section class="library-header" style="background-image: url('https://images.unsplash.com/photo-1490971774356-7fac993cc438?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
+            <h1>مكتبة الفيديو</h1>
+            <p>إبداعات صناع المحتوى المرئي في الأردن</p>
+        </section>
+
+        <div class="artist-container">
+            <div class="artist-info">
+               <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="صانع المحتوى" class="artist-img">
+                <h2 class="artist-name">أحمد الزعبي</h2>
+                <p class="artist-bio">
+                    صانع محتوى فيديو من الأردن، متخصص في الأفلام الوثائقية والتقارير الإخبارية.
+                    بدأ مسيرته عام 2015 وحصل على عدة جوائز محلية وعربية لأعماله المتميزة.
+                </p>
+                <a href="#" class="artist-contact">تواصل مع أحمد</a>
+            </div>
+            <div>
+                <div class="main-content">
+                    <img src="https://images.unsplash.com/photo-1618243357602-ccba303a3fd6?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="عمل فيديو">
+                    <div class="content-details">
+                        <h2 class="content-title">"الفيديو التسويقي"</h2>
+                        <p>فيلم وثائقي قصير | 15 دقيقة | 2023</p>
+                        <p>يستعرض الفيلم دور فيديوهات التسويق وفوائدها المدهشة في تطوير المشاريع</p>
+                        <div class="action-buttons">
+                            <button class="btn-primary">احجز جلسة تصوير فيديو</button>
+                            <button class="btn-secondary">تفاصيل مرتبطة بالفيديو</button>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="gallery-title">أعمال أخرى لنفس الصانع</h3>
+                <div class="items-grid">
+                    <div class="item-card">
+                        <img src="https://images.unsplash.com/photo-1724349619179-a2d99b12a288?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="عمل فيديو">
+                        <div class="card-info">
+                            <p class="card-creator">أحمد الزعبي</p>
+                            <h4 class="card-title">"المساعدات الأردنية"</h4>
+                            <p>تقرير إخباري | 10 دقائق</p>
+                        </div>
+                    </div>
+                    <div class="item-card">
+                        <img src="https://plus.unsplash.com/premium_photo-1661380954234-13d98a83577c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="عمل فيديو">
+                        <div class="card-info">
+                            <p class="card-creator">أحمد الزعبي</p>
+                            <h4 class="card-title">"صناعة الفخار"</h4>
+                            <p>فيلم قصير | 12 دقيقة</p>
+                        </div>
+                    </div>
+                    <div class="item-card">
+                        <img src="https://images.unsplash.com/photo-1659696737726-0ada03679e26?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="عمل فيديو">
+                        <div class="card-info">
+                            <p class="card-creator">أحمد الزعبي</p>
+                            <h4 class="card-title">"مدينة جرش"</h4>
+                            <p>تغطية خاصة | 8 دقائق</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="horizontal-scroll-section">
+            <div class="section-header">
+                <h2 class="section-title">صانعو محتوى آخرون</h2>
+                <a href="#" class="view-all">عرض الكل</a>
+            </div>
+            <div class="horizontal-scroll">
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1626806089406-c72cec10d0bb?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="صانع محتوى">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">سامي النجار</p>
+                        <h4 class="scroll-title">تصوير ومونتاج</h4>
+                        <p>متخصص في الأفلام القصيرة</p>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1580017606768-c33fa602d788?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="صانعة محتوى">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">ليلى أحمد</p>
+                        <h4 class="scroll-title">إنتاج أفلام وثائقية</h4>
+                        <p>تركيز على القضايا الاجتماعية</p>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1545167622-3a6ac756afa4?q=80&w=712&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="صانع محتوى">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">خالد الحمود</p>
+                        <h4 class="scroll-title">تصوير فني</h4>
+                        <p>أفلام دعائية وإعلانية</p>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="صانعة محتوى">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">نورا صالح</p>
+                        <h4 class="scroll-title">مونتاج إبداعي</h4>
+                        <p>تخصص في الفيديوهات الموسيقية</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="horizontal-scroll-section">
+            <div class="section-header">
+                <h2 class="section-title">أعمال فيديو مميزة</h2>
+                <a href="#" class="view-all">عرض الكل</a>
+            </div>
+            <div class="horizontal-scroll">
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1695408246612-584543865997?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="عمل فيديو">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">أحمد الزعبي</p>
+                        <h4 class="scroll-title">"فن التصوير"</h4>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1612020499361-bc8d6d52b288?q=80&w=626&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="عمل فيديو">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">سامي النجار</p>
+                        <h4 class="scroll-title">"حكايات من عمان"</h4>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1605476973457-121d4f866770?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="عمل فيديو">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">ليلى أحمد</p>
+                        <h4 class="scroll-title">"قصة من الصحراء"</h4>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="عمل فيديو">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">خالد الحمود</p>
+                        <h4 class="scroll-title">"أصوات المدينة"</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- معرض الصور -->
+    <div id="photo-gallery" class="page">
+        <section class="library-header" style="background-image: url('https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
+            <h1>معرض الصور</h1>
+            <p>إبداعات المصورين الفوتوغرافيين الأردنيين</p>
+        </section>
+
+        <div class="artist-container">
+            <div class="artist-info">
+                <img src="https://images.unsplash.com/photo-1661170130930-138203790c5f?q=80&w=1331&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="المصور" class="artist-img">
+                <h2 class="artist-name">يوسف علي</h2>
+                <p class="artist-bio">
+                    مصور فوتوغرافي من الأردن، متخصص في تصوير المناظر الطبيعية والتراث.
+                    بدأ مسيرته عام 2012 وحصل على عدة جوائز محلية ودولية لأعماله المتميزة.
+                </p>
+                <a href="#" class="artist-contact">تواصل مع يوسف</a>
+            </div>
+            <div>
+                <div class="main-content">
+                    <img src="https://images.unsplash.com/photo-1706271743980-ea5357e67cb3?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="صورة فوتوغرافية">
+                    <div class="content-details">
+                        <h2 class="content-title">"أصدقاء آخرون"</h2>
+                        <p>تصوير فوتوغرافي | 2023</p>
+                        <p>صورة تظهر العلاقة الجميلة بين الناس والكائنات الحية الأخرى</p>
+                        <div class="action-buttons">
+                            <button class="btn-primary">شراء الصورة</button>
+                            <button class="btn-secondary">طلب خدمة تصوير</button>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="gallery-title">أعمال أخرى لنفس المصور</h3>
+                <div class="items-grid">
+                    <div class="item-card">
+                        <img src="https://images.unsplash.com/photo-1629142796909-aeddffc6a3a4?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="صورة فوتوغرافية">
+                        <div class="card-info">
+                            <p class="card-creator">يوسف علي</p>
+                            <h4 class="card-title">"صداقة"</h4>
+                            <p>تصوير الحياة البرية</p>
+                        </div>
+                    </div>
+                    <div class="item-card">
+                        <img src="https://images.unsplash.com/photo-1597424868002-8e844632031d?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="صورة فوتوغرافية">
+                        <div class="card-info">
+                            <p class="card-creator">يوسف علي</p>
+                            <h4 class="card-title">"موسيقى تراثية"</h4>
+                            <p>تصوير ثقافي</p>
+                        </div>
+                    </div>
+                    <div class="item-card">
+                        <img src="https://images.unsplash.com/photo-1610733376381-010db4468779?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="صورة فوتوغرافية">
+                        <div class="card-info">
+                            <p class="card-creator">يوسف علي</p>
+                            <h4 class="card-title">"أمل"</h4>
+                            <p>تصوير بورتريه</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="horizontal-scroll-section">
+            <div class="section-header">
+                <h2 class="section-title">مصورون آخرون</h2>
+                <a href="#" class="view-all">عرض الكل</a>
+            </div>
+            <div class="horizontal-scroll">
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=280&q=80" alt="مصورة">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">لجين الغانم</p>
+                        <h4 class="scroll-title">تصوير بورتريه</h4>
+                        <p>تلتقط مشاعر عميقة</p>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1724627560859-9f6d58ddc7d6?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="مصورة محجبة">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">ليلى العلي</p>
+                        <h4 class="scroll-title">تصوير معماري</h4>
+                        <p>متخصصة في المباني الأثرية</p>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1610362556225-eac73c6d235d?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="مصور">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">ماجد الريفي</p>
+                        <h4 class="scroll-title">تصوير الشارع</h4>
+                        <p>يوثق الحياة اليومية في عمّان</p>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1626519186046-e2886a4fa341?q=80&w=765&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="مصورة">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">هند خالد</p>
+                        <h4 class="scroll-title">تصوير فني</h4>
+                        <p>تستخدم تقنيات مبتكرة</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="horizontal-scroll-section">
+            <div class="section-header">
+                <h2 class="section-title">صور مميزة</h2>
+                <a href="#" class="view-all">عرض الكل</a>
+            </div>
+            <div class="horizontal-scroll">
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1539722833765-af2db79db72d?q=80&w=1168&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="صورة">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">لجين الغانم</p>
+                        <h4 class="scroll-title">"صعود"</h4>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://plus.unsplash.com/premium_photo-1683140421061-1988aae2dc69?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="صورة">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">ليلى العلي</p>
+                        <h4 class="scroll-title">"تحدي المستحيل"</h4>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://plus.unsplash.com/premium_photo-1661433059976-565f04458467?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="صورة">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">ماجد الريفي</p>
+                        <h4 class="scroll-title">"زينة"</h4>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1474144817891-babf8ac14ab0?q=80&w=1112&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="صورة">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">هند خالد</p>
+                        <h4 class="scroll-title">"جمال خيالي"</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- معرض اللوحات الفنية -->
+    <div id="art-gallery" class="page">
+        <section class="library-header" style="background-image: url('https://images.unsplash.com/photo-1578926375605-eaf7559b1458?q=80&w=1410&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
+            <h1>معرض اللوحات الفنية</h1>
+            <p>إبداعات الفنانين التشكيليين الأردنيين</p>
+        </section>
+
+        <div class="artist-container">
+            <div class="artist-info">
+                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="الفنان" class="artist-img">
+                <h2 class="artist-name">سارة أحمد</h2>
+                <p class="artist-bio">
+                    فنانة تشكيلية من الأردن، تخرجت من كلية الفنون الجميلة عام 2015.
+                    تتميز أعمالها بمزج التراث الأردني مع الفن المعاصر.
+                    شاركت في أكثر من 20 معرضاً محلياً ودولياً.
+                </p>
+                <a href="#" class="artist-contact">تواصل مع سارة</a>
+            </div>
+            <div>
+                <div class="main-content">
+                    <img src="https://plus.unsplash.com/premium_photo-1672580343136-5f5d0f82edeb?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="لوحة فنية">
+                    <div class="content-details">
+                        <h2 class="content-title">"الحنين"</h2>
+                        <p>زيت على قماش | 100x80 سم | 2023</p>
+                        <p>لوحة تعبر عن الحنين إلى الماضي بألوان دافئة وضربات فرشاة تعبيرية</p>
+                        <div class="action-buttons">
+                            <button class="btn-primary">شراء اللوحة</button>
+                            <button class="btn-secondary">طلب عمل مماثل</button>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="gallery-title">أعمال أخرى لنفس الفنان</h3>
+                <div class="items-grid">
+                    <div class="item-card">
+                        <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="لوحة فنية">
+                        <div class="card-info">
+                            <p class="card-creator">سارة أحمد</p>
+                            <h4 class="card-title">"الشوق"</h4>
+                            <p>زيت على قماش | 80x60 سم</p>
+                        </div>
+                    </div>
+                    <div class="item-card">
+                        <img src="https://images.unsplash.com/photo-1531913764164-f85c52e6e654?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="لوحة فنية">
+                        <div class="card-info">
+                            <p class="card-creator">سارة أحمد</p>
+                            <h4 class="card-title">"حلم"</h4>
+                            <p>ألوان مائية | 70x50 سم</p>
+                        </div>
+                    </div>
+                    <div class="item-card">
+                        <img src="https://images.unsplash.com/photo-1673297180075-411992cad941?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="لوحة فنية">
+                        <div class="card-info">
+                            <p class="card-creator">سارة أحمد</p>
+                            <h4 class="card-title">"رؤية"</h4>
+                            <p>أكريليك على خشب | 90x60 سم</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="horizontal-scroll-section">
+            <div class="section-header">
+                <h2 class="section-title">فنانون آخرون</h2>
+                <a href="#" class="view-all">عرض الكل</a>
+            </div>
+            <div class="horizontal-scroll">
+                <div class="scroll-card">
+                    <img src="https://plus.unsplash.com/premium_photo-1726815616472-8ddb1c5ea697?q=80&w=1048&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="فنان">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">خالد الزعبي</p>
+                        <h4 class="scroll-title">فن تشكيلي</h4>
+                        <p>متخصص في الفن التجريدي</p>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?ixlib=rb-1.2.1&auto=format&fit=crop&w=280&q=80" alt="فنانة">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">لمى الحسن</p>
+                        <h4 class="scroll-title">رسم زيتي</h4>
+                        <p>أعمال مستوحاة من التراث</p>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1668531282396-96bea4cacab5?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="فنان">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">أحمد القيسي</p>
+                        <h4 class="scroll-title">فن جرافيتي</h4>
+                        <p>فن الشارع الأردني</p>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://plus.unsplash.com/premium_photo-1661766792548-8b7ed32719fa?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="فنانة">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">يارا صالح</p>
+                        <h4 class="scroll-title">ألوان مائية</h4>
+                        <p>لوحات طبيعة أردنية</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="horizontal-scroll-section">
+            <div class="section-header">
+                <h2 class="section-title">لوحات مميزة</h2>
+                <a href="#" class="view-all">عرض الكل</a>
+            </div>
+            <div class="horizontal-scroll">
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-1.2.1&auto=format&fit=crop&w=280&q=80" alt="لوحة">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">سارة أحمد</p>
+                        <h4 class="scroll-title">"ذكريات"</h4>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://plus.unsplash.com/premium_photo-1664013263421-91e3a8101259?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="لوحة">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">خالد الزعبي</p>
+                        <h4 class="scroll-title">"أمل"</h4>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1531913764164-f85c52e6e654?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="لوحة">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">لمى الحسن</p>
+                        <h4 class="scroll-title">"هدوء"</h4>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1748285279094-54197ec737f1?q=80&w=1111&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="لوحة">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">أحمد القيسي</p>
+                        <h4 class="scroll-title">"عبق"</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- مدونة الكتابة الإبداعية -->
+    <div id="writing-blog" class="page">
+        <section class="library-header" style="background-image: url('https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1373&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
+            <h1>مدونة الكتابة الإبداعية</h1>
+            <p>إبداعات الكتاب والأدباء الأردنيين</p>
+        </section>
+
+        <div class="artist-container">
+            <div class="artist-info">
+                <img src="https://images.unsplash.com/photo-1594823823554-b3cf73448d3d?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="الكاتب" class="artist-img">
+                <h2 class="artist-name">عمر الرشيد</h2>
+                <p class="artist-bio">
+                    كاتب وروائي أردني، صدر له ثلاث روايات ومجموعتان قصصية.
+                    حصل على عدة جوائز أدبية محلية وعربية.
+                    يتميز أسلوبه بالعمق النفسي والتصوير الدقيق للمجتمع.
+                </p>
+                <a href="#" class="artist-contact">تواصل مع عمر</a>
+            </div>
+            <div>
+                <div class="main-content">
+                    <img src="https://images.unsplash.com/photo-1644062774769-0f927053e1c0?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="عمل أدبي">
+                    <div class="content-details">
+                        <h2 class="content-title">"ظلال المدينة"</h2>
+                        <p>رواية | 320 صفحة | 2022</p>
+                        <p>مراجعة أدبية تسلط الضوء على تحولات المجتمع الأردني عبر عقود من الزمن من خلال سرد قصص عائلة واحدة</p>
+                        <div class="action-buttons">
+                            <button class="btn-primary">طلب كتابة محتوى </button>
+                            <button class="btn-secondary">متابعة القراءة</button>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="gallery-title">أعمال أخرى لنفس الكاتب</h3>
+                <div class="items-grid">
+                    <div class="item-card">
+                        <img src="https://plus.unsplash.com/premium_photo-1679785652664-5893d9829aed?q=80&w=790&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="عمل أدبي">
+                        <div class="card-info">
+                            <p class="card-creator">عمر الرشيد</p>
+                            <h4 class="card-title">"أصوات من بعيد"</h4>
+                            <p>مجموعة قصصية | 2020</p>
+                        </div>
+                    </div>
+                    <div class="item-card">
+                        <img src="https://images.unsplash.com/photo-1535332371349-a5d229f49cb5?q=80&w=765&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="عمل أدبي">
+                        <div class="card-info">
+                            <p class="card-creator">عمر الرشيد</p>
+                            <h4 class="card-title">"ليالي القمر"</h4>
+                            <p>رواية | 2018</p>
+                        </div>
+                    </div>
+                    <div class="item-card">
+                        <img src="https://images.unsplash.com/photo-1619260288316-1dc66c32b718?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="عمل أدبي">
+                        <div class="card-info">
+                            <p class="card-creator">عمر الرشيد</p>
+                            <h4 class="card-title">"رسائل لم تكتب"</h4>
+                            <p>مقالات | 2016</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="horizontal-scroll-section">
+            <div class="section-header">
+                <h2 class="section-title">كتاب آخرون</h2>
+                <a href="#" class="view-all">عرض الكل</a>
+            </div>
+            <div class="horizontal-scroll">
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="كاتبة">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">نورا خالد</p>
+                        <h4 class="scroll-title">كتابة إبداعية</h4>
+                        <p>متخصصة في القصة القصيرة</p>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=280&q=80" alt="كاتبة">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">سمر الحمود</p>
+                        <h4 class="scroll-title">شعر ونثر</h4>
+                        <p>أعمال مستوحاة من التراث</p>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1649705433263-5c80d699b5f5?q=80&w=742&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="كاتب">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">ياسر سليم</p>
+                        <h4 class="scroll-title">كتابة صحفية</h4>
+                        <p>تحقيقات وتقارير</p>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://plus.unsplash.com/premium_photo-1672239496290-5061cfee7ebb?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="كاتب">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">خالد الزعبي</p>
+                        <h4 class="scroll-title">كتابة مسرحية</h4>
+                        <p>نصوص مسرحية معاصرة</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="horizontal-scroll-section">
+            <div class="section-header">
+                <h2 class="section-title">أعمال أدبية مميزة</h2>
+                <a href="#" class="view-all">عرض الكل</a>
+            </div>
+            <div class="horizontal-scroll">
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1644062774769-0f927053e1c0?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="عمل أدبي">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">عمر الرشيد</p>
+                        <h4 class="scroll-title">"ظلال المدينة"</h4>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1584843311701-1673ac6294a6?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="عمل أدبي">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">نورا خالد</p>
+                        <h4 class="scroll-title">"حكايات من زمن آخر"</h4>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1506057278219-795838d4c2dd?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="عمل أدبي">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">سمر الحمود</p>
+                        <h4 class="scroll-title">"قصائد  السلام"</h4>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://plus.unsplash.com/premium_photo-1710962184823-907ade6b3783?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="عمل أدبي">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">ياسر سليم</p>
+                        <h4 class="scroll-title">"تحت سماء واحدة"</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- مكتبة القراءة -->
+    <div id="reading-library" class="page">
+        <section class="library-header" style="background-image: url('https://images.unsplash.com/photo-1492539438225-2666b2a98f93?q=80&w=1174&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
+            <h1>مكتبة القراءة</h1>
+            <p>مجموعة من الكتب والمراجع القيمة في مختلف المجالات</p>
+        </section>
+
+        <div class="artist-container">
+            <div class="artist-info">
+                <img src="https://images.unsplash.com/photo-1718209881007-c0ecdfc00f9d?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="المؤلف" class="artist-img">
+                <h2 class="artist-name">د. محمد حسن</h2>
+                <p class="artist-bio">
+                    أكاديمي وباحث أردني، أستاذ في جامعة اليرموك.
+                    صدر له أكثر من 10 كتب في مجالات التنمية والتكنولوجيا.
+                    حاصل على عدة جوائز بحثية وعلمية.
+                </p>
+                <a href="#" class="artist-contact">تواصل مع د. محمد</a>
+            </div>
+            <div>
+                <div class="main-content">
+                    <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=1212&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="كتاب">
+                    <div class="content-details">
+                        <h2 class="content-title">"كيف يعمل الابتكار "</h2>
+                        <p>كتاب تنموي | 250 صفحة | 2021</p>
+                        <p>دراسة شاملة لكتاب ريدلي ويُوضّح كيف نحتاج إلى تغيير طريقة تفكيرنا وأثر ذلك </p>
+                        <div class="action-buttons">
+                            <button class="btn-primary">شراء الكتاب</button>
+                            <button class="btn-secondary">قراءة المزيد</button>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="gallery-title">أعمال أخرى لنفس المؤلف</h3>
+                <div class="items-grid">
+                    <div class="item-card">
+                        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="كتاب">
+                        <div class="card-info">
+                            <p class="card-creator">د. محمد حسن</p>
+                            <h4 class="card-title">"التكنولوجيا والتعليم"</h4>
+                            <p>كتاب علمي | 2019</p>
+                        </div>
+                    </div>
+                    <div class="item-card">
+                        <img src="https://plus.unsplash.com/premium_photo-1676637656166-cb7b3a43b81a?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="كتاب">
+                        <div class="card-info">
+                            <p class="card-creator">د. محمد حسن</p>
+                            <h4 class="card-title">"الذكاء الاصطناعي"</h4>
+                            <p>كتاب علمي | 2017</p>
+                        </div>
+                    </div>
+                    <div class="item-card">
+                        <img src="https://images.unsplash.com/photo-1553484771-4e29a68540f4?q=80&w=963&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="كتاب">
+                        <div class="card-info">
+                            <p class="card-creator">د. محمد حسن</p>
+                            <h4 class="card-title">"ريادة الأعمال"</h4>
+                            <p>كتاب علمي | 2015</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="horizontal-scroll-section">
+            <div class="section-header">
+                <h2 class="section-title">مؤلفون آخرون</h2>
+                <a href="#" class="view-all">عرض الكل</a>
+            </div>
+            <div class="horizontal-scroll">
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1623261742238-313064efa022?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="مؤلفة">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">د. هدى العلي</p>
+                        <h4 class="scroll-title">التنمية البشرية</h4>
+                        <p>متخصصة في التطوير الذاتي</p>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1543430720-fa600c67e423?q=80&w=1217&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="مؤلفة">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">د. سارة محمود</p>
+                        <h4 class="scroll-title">العلوم التربوية</h4>
+                        <p>أبحاث في مجال التعليم</p>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://plus.unsplash.com/premium_photo-1689977927774-401b12d137d6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="مؤلف">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">د. خالد الزعبي</p>
+                        <h4 class="scroll-title">التكنولوجيا</h4>
+                        <p>أبحاث في الذكاء الاصطناعي</p>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://plus.unsplash.com/premium_photo-1681914418164-42a1aada8f63?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="مؤلف">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">د. ياسر سليم</p>
+                        <h4 class="scroll-title">الاقتصاد</h4>
+                        <p>دراسات في الاقتصاد الأردني</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="horizontal-scroll-section">
+            <div class="section-header">
+                <h2 class="section-title">كتب مميزة</h2>
+                <a href="#" class="view-all">عرض الكل</a>
+            </div>
+            <div class="horizontal-scroll">
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1534709153997-d6659469f951?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="كتاب">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">د. محمد حسن</p>
+                        <h4 class="scroll-title">"التنمية المستدامة في الأردن"</h4>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1605023928090-3d0506af740a?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="كتاب">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">د. هدى العلي</p>
+                        <h4 class="scroll-title">"قوة العادات"</h4>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1604882355734-95a1db66e744?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="كتاب">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">د. سارة محمود</p>
+                        <h4 class="scroll-title">"التعلم النشط"</h4>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://plus.unsplash.com/premium_photo-1663013424060-48c89f34de73?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="كتاب">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">د. خالد الزعبي</p>
+                        <h4 class="scroll-title">"مستقبل التكنولوجيا"</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- دليل الأعمال -->
+    <div id="business-directory" class="page">
+        <section class="library-header" style="background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
+            <h1>دليل الأعمال</h1>
+            <p>دليل لأصحاب الأعمال الإبداعية في الأردن</p>
+        </section>
+
+        <div class="artist-container">
+            <div class="artist-info">
+                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="صاحب العمل" class="artist-img">
+                <h2 class="artist-name">أحمد سليمان</h2>
+                <p class="artist-bio">
+                    رائد أعمال أردني، مؤسس شركة "إبداع تك" المتخصصة في التصميم الجرافيكي والتسويق الرقمي.
+                    لديه أكثر من 10 سنوات خبرة في مجال ريادة الأعمال.
+                </p>
+                <a href="#" class="artist-contact">تواصل مع أحمد</a>
+            </div>
+            <div>
+                <div class="main-content">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="عمل تجاري">
+                    <div class="content-details">
+                        <h2 class="content-title">"إبداع تك"</h2>
+                        <p>شركة تصميم جرافيكي وتسويق رقمي | تأسست 2015</p>
+                        <p>شركة متخصصة في تقديم حلول إبداعية في مجال التصميم الجرافيكي والتسويق الرقمي للشركات الصغيرة والمتوسطة</p>
+                        <div class="action-buttons">
+                            <button class="btn-primary">زيارة الموقع</button>
+                            <button class="btn-secondary">طلب خدمة</button>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="gallery-title">أعمال أخرى لنفس رائد الأعمال</h3>
+                <div class="items-grid">
+                    <div class="item-card">
+                        <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="عمل تجاري">
+                        <div class="card-info">
+                            <p class="card-creator">أحمد سليمان</p>
+                            <h4 class="card-title">"ديجيتال ميديا"</h4>
+                            <p>إنتاج محتوى رقمي</p>
+                        </div>
+                    </div>
+                    <div class="item-card">
+                        <img src="https://images.unsplash.com/photo-1665686306574-1ace09918530?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="عمل تجاري">
+                        <div class="card-info">
+                            <p class="card-creator">أحمد سليمان</p>
+                            <h4 class="card-title">"براندنج"</h4>
+                            <p>تطوير الهوية البصرية</p>
+                        </div>
+                    </div>
+                    <div class="item-card">
+                        <img src="https://images.unsplash.com/photo-1520390138845-fd2d229dd553?q=80&w=1489&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="عمل تجاري">
+                        <div class="card-info">
+                            <p class="card-creator">أحمد سليمان</p>
+                            <h4 class="card-title">"ستوديو 7"</h4>
+                            <p>استوديو تصوير فوتوغرافي</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="horizontal-scroll-section">
+            <div class="section-header">
+                <h2 class="section-title">رواد أعمال آخرون</h2>
+                <a href="#" class="view-all">عرض الكل</a>
+            </div>
+            <div class="horizontal-scroll">
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="رائدة أعمال">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">نورا خالد</p>
+                        <h4 class="scroll-title">"كريتيف ستوديو"</h4>
+                        <p>تصميم جرافيكي</p>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=280&q=80" alt="رائدة أعمال">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">ليلى أحمد</p>
+                        <h4 class="scroll-title">"فوكس ميديا"</h4>
+                        <p>إنتاج أفلام</p>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1601933552254-7167f80a6004?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="رائد أعمال">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">خالد الزعبي</p>
+                        <h4 class="scroll-title">"تيك سوليوشنز"</h4>
+                        <p>حلول تكنولوجية</p>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://plus.unsplash.com/premium_photo-1661377166972-42f22607c24e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="رائد أعمال">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">ياسر سليم</p>
+                        <h4 class="scroll-title">"ديجيتال ماركت"</h4>
+                        <p>تسويق رقمي</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="horizontal-scroll-section">
+            <div class="section-header">
+                <h2 class="section-title">أعمال تجارية مميزة</h2>
+                <a href="#" class="view-all">عرض الكل</a>
+            </div>
+            <div class="horizontal-scroll">
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1476231790875-016a80c274f3?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="عمل تجاري">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">أحمد سليمان</p>
+                        <h4 class="scroll-title">"إبداع تك"</h4>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://plus.unsplash.com/premium_photo-1744193093495-11f35004a2b0?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="عمل تجاري">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">نورا خالد</p>
+                        <h4 class="scroll-title">"كريتيف ستوديو"</h4>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1536604673810-81370412626d?q=80&w=1073&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="عمل تجاري">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">ليلى أحمد</p>
+                        <h4 class="scroll-title">"فوكس ميديا"</h4>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://plus.unsplash.com/premium_photo-1661885612035-58b85113fa89?q=80&w=1086&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="عمل تجاري">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">خالد الزعبي</p>
+                        <h4 class="scroll-title">"تيك سوليوشنز"</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- مكتبة الفعاليات المحلية -->
+    <div id="events-library" class="page">
+        <section class="library-header" style="background-image: url('https://images.unsplash.com/photo-1572043394858-11e1d5549f3c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
+            <h1>مكتبة الفعاليات المحلية</h1>
+            <p>فعاليات ثقافية وفنية في الأردن</p>
+        </section>
+
+        <div class="artist-container">
+            <div class="artist-info">
+                <img src="https://images.unsplash.com/photo-1626460561069-c86d94488bbd?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="منظم الفعالية" class="artist-img">
+                <h2 class="artist-name">مؤسسة إبداع الثقافية</h2>
+                <p class="artist-bio">
+                    مؤسسة ثقافية غير ربحية تهدف إلى دعم الفنون والثقافة في الأردن.
+                    تنظم العديد من الفعاليات والمعارض والمهرجانات الثقافية.
+                    تأسست عام 2010 ولها العديد من الشركاء المحليين والدوليين.
+                </p>
+                <a href="#" class="artist-contact">تواصل مع المؤسسة</a>
+            </div>
+            <div>
+                <div class="main-content">
+                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="فعالية">
+                    <div class="content-details">
+                        <h2 class="content-title">"مهرجان الفنون البصرية"</h2>
+                        <p>فعالية سنوية | 5 أيام | عمّان</p>
+                        <p>مهرجان يعرض أعمال الفنانين التشكيليين الأردنيين ويشمل ورش عمل وجلسات حوارية</p>
+                        <div class="action-buttons">
+                            <button class="btn-primary">التسجيل في الفعالية</button>
+                            <button class="btn-secondary">المزيد من التفاصيل</button>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="gallery-title">فعاليات أخرى لنفس المنظم</h3>
+                <div class="items-grid">
+                    <div class="item-card">
+                        <img src="https://images.unsplash.com/photo-1515168985652-8454bcc8fcaf?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="فعالية">
+                        <div class="card-info">
+                            <p class="card-creator">مؤسسة إبداع الثقافية</p>
+                            <h4 class="card-title">"أمسيات شعرية"</h4>
+                            <p>فعالية شهرية | عمّان</p>
+                        </div>
+                    </div>
+                    <div class="item-card">
+                        <img src="https://images.unsplash.com/photo-1646307797671-10bbc3fbdac3?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="فعالية">
+                        <div class="card-info">
+                            <p class="card-creator">مؤسسة إبداع الثقافية</p>
+                            <h4 class="card-title">"معرض الكتاب المستقل"</h4>
+                            <p>فعالية سنوية | عمّان</p>
+                        </div>
+                    </div>
+                    <div class="item-card">
+                        <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="فعالية">
+                        <div class="card-info">
+                            <p class="card-creator">مؤسسة إبداع الثقافية</p>
+                            <h4 class="card-title">"حفلات موسيقية"</h4>
+                            <p>فعالية فصلية | عمّان</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="horizontal-scroll-section">
+            <div class="section-header">
+                <h2 class="section-title">منظمون آخرون</h2>
+                <a href="#" class="view-all">عرض الكل</a>
+            </div>
+            <div class="horizontal-scroll">
+                <div class="scroll-card">
+                    <img src="https://plus.unsplash.com/premium_photo-1681492164528-71e8a8fdd51b?q=80&w=688&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="منظمة">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">جمعية الفن الحديث</p>
+                        <h4 class="scroll-title">فعاليات فنية</h4>
+                        <p>معارض وورش عمل</p>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1522445640489-13a91185672e?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="منظمة">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">مركز الإبداع الأدبي</p>
+                        <h4 class="scroll-title">أمسيات أدبية</h4>
+                        <p>قراءات ونقاشات</p>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="منظمة">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">مؤسسة التكنولوجيا والفنون</p>
+                        <h4 class="scroll-title">هاكاثونات</h4>
+                        <p>مسابقات إبداعية</p>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1566753323558-f4e0952af115?q=80&w=1021&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="منظمة">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">جمعية التراث الأردني</p>
+                        <h4 class="scroll-title">فعاليات تراثية</h4>
+                        <p>حفلات ومهرجانات</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="horizontal-scroll-section">
+            <div class="section-header">
+                <h2 class="section-title">فعاليات مميزة</h2>
+                <a href="#" class="view-all">عرض الكل</a>
+            </div>
+            <div class="horizontal-scroll">
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="فعالية">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">مؤسسة إبداع الثقافية</p>
+                        <h4 class="scroll-title">"مهرجان الفنون البصرية"</h4>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="فعالية">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">جمعية الفن الحديث</p>
+                        <h4 class="scroll-title">"مؤتمر الذكاء الاصطناعي"</h4>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1671209088974-1ae6f8c95c50?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="فعالية">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">مركز الإبداع الأدبي</p>
+                        <h4 class="scroll-title">"مسابقة وطنية شعرية"</h4>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <img src="https://images.unsplash.com/photo-1662530371692-8dc3d6e0f9f5?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="فعالية">
+                    <div class="scroll-card-info">
+                        <p class="scroll-creator">جمعية التراث الأردني</p>
+                        <h4 class="scroll-title">"الزي التراثي"</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- تذييل الصفحة -->
+    <footer>
+        <div class="footer-content">
+            <h3>منصة تكوين</h3>
+            <p>منصة إبداعية لدعم المواهب الأردنية في مختلف المجالات الفنية والثقافية</p>
+            <div class="footer-links">
+                <a href="#" class="nav-link" data-page="home">الرئيسية</a>
+                <a href="#" class="nav-link" data-page="video-library">مكتبة الفيديو</a>
+                <a href="#" class="nav-link" data-page="photo-gallery">معرض الصور</a>
+                <a href="#" class="nav-link" data-page="art-gallery">معرض اللوحات الفنية</a>
+                <a href="#" class="nav-link" data-page="writing-blog">مدونة الكتابة الإبداعية</a>
+                <a href="#" class="nav-link" data-page="reading-library">مكتبة القراءة</a>
+                <a href="#" class="nav-link" data-page="business-directory">دليل الأعمال</a>
+                <a href="#" class="nav-link" data-page="events-library">مكتبة الفعاليات المحلية</a>
+            </div>
+            <p>جميع الحقوق محفوظة لمنصة تكوين &copy; 2025</p>
+        </div>
+    </footer>
+
+    <script>
+        // تنقل بين الصفحات
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // إزالة التنشيط من جميع الروابط
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                
+                // إضافة التنشيط للرابط الحالي
+                this.classList.add('active');
+                
+                // إخفاء جميع الصفحات
+                document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+                
+                // إظهار الصفحة المطلوبة
+                const pageId = this.getAttribute('data-page');
+                document.getElementById(pageId).classList.add('active');
+                
+                // التمرير لأعلى الصفحة
+                window.scrollTo(0, 0);
+            });
+        });
+
+        // تنقل بين المكتبات من الصفحة الرئيسية
+        document.querySelectorAll('.image-card[data-page]').forEach(card => {
+            card.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const pageId = this.getAttribute('data-page');
+                
+                // إزالة التنشيط من جميع الروابط
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                
+                // إضافة التنشيط للرابط المناسب
+                document.querySelector(`.nav-link[data-page="${pageId}"]`).classList.add('active');
+                
+                // إخفاء جميع الصفحات
+                document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+                
+                // إظهار الصفحة المطلوبة
+                document.getElementById(pageId).classList.add('active');
+                
+                // التمرير لأعلى الصفحة
+                window.scrollTo(0, 0);
+            });
+        });
+
+     // تفاعل أزرار الخدمات
+        document.querySelectorAll('[data-service]').forEach(service => {
+            service.addEventListener('click', function(e) {
+                e.preventDefault();
+                const serviceName = this.querySelector('h3').textContent;
+                alert(`شكراً لاهتمامك بطلب خدمة ${serviceName}\nسيتم توجيهك إلى صفحة الحجز`);
+            });
+        });
+
+        // تفاعل أزرار التواصل
+        document.querySelectorAll('.artist-contact').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const artistName = this.closest('.artist-info').querySelector('.artist-name').textContent;
+                alert(`سيتم توجيهك إلى صفحة التواصل مع ${artistName}`);
+            });
+        });
+
+        // تفاعل أزرار الشراء/المشاهدة
+        document.querySelectorAll('.btn-primary').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const itemTitle = this.closest('.content-details').querySelector('.content-title').textContent;
+                alert(`شكراً لاهتمامك ب${itemTitle}\nسيتم توجيهك إلى صفحة الشراء`);
+            });
+        });
+
+        // تفاعل أزرار التفاصيل/المزيد
+        document.querySelectorAll('.btn-secondary').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const itemTitle = this.closest('.content-details').querySelector('.content-title').textContent;
+                alert(`سيتم توجيهك إلى صفحة تفاصيل ${itemTitle}`);
+            });
+        });
+
+        // تفاعل أزرار عرض الكل
+        document.querySelectorAll('.view-all').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const sectionTitle = this.closest('.section-header').querySelector('.section-title').textContent;
+                alert(`سيتم توجيهك إلى صفحة ${sectionTitle}`);
+            });
+        });
+    </script>
+</body>
+</html>
